@@ -9,6 +9,8 @@ dependencyManagement {
 
 
 dependencies {
+    compile "org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure:$springSecurityOAuthAutoconfigVersion"
+    compile "io.pivotal.spring.cloud:spring-cloud-sso-connector:$springCloudSsoVersion"
     compile project(":components:rest-support")
 
     compile "org.springframework.boot:spring-boot-starter-web"
@@ -21,3 +23,9 @@ dependencies {
 //    compile group: 'org.springframework.cloud', name: 'spring-cloud-netflix-eureka-client', version: '2.0.3.RELEASE'
     testCompile project(":components:test-support")
 }
+
+bootRun.environment([
+        "APPLICATION_OAUTH_ENABLED": true,
+        "SECURITY_OAUTH2_CLIENT_CLIENT_ID": "tracker-client",
+        "SECURITY_OAUTH2_CLIENT_CLIENT_SECRET": "supersecret"
+])
